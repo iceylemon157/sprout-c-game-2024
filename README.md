@@ -16,7 +16,7 @@ docker compose up
 
 ### C++ server
 
-接著開一個新的 terminal，先 `cd` 到 `cd sprout-c-game-2024` 裡面，然後執行以下指令就可以把 C++ server 跑起來
+接著開一個新的 terminal，先 `cd` 到 `sprout-c-game-2024` 裡面，然後執行以下指令就可以把 C++ server 跑起來
 
 ```bash
 docker compose exec cpp_server /bin/bash
