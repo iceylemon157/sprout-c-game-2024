@@ -46,5 +46,5 @@ else ()
 endif ()
 
 # compile my game server!
-add_executable(server GameServer.cc GameController.cc user.cc)
+add_executable(server GameServer.cc GameController.cc UserAction.cc)
 target_link_libraries(server ${WFREST_LIB})

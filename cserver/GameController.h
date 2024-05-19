@@ -3,8 +3,9 @@
 
 #include <utility>
 #include <string>
-#include "wfrest/HttpServer.h"
+#include <vector>
 #include "kitchen.h"
+#include "wfrest/Json.h"
 
 using namespace std;
 
@@ -13,27 +14,43 @@ namespace ctl {
     public:
 
         // Singleton
-        static GameController& getInstance(std::string _resp) {
+        static GameController& getInstance(string _resp) {
             static GameController instance(_resp);
             return instance;
         }
 
         // Operation functions
-        void MoveLeft();
-        void MoveRight();
-        void MoveUp();
-        void MoveDown();
-        void Interact();
-        void InteractSpecial();
+        void MoveLeft() { resp = "a"; };
+        void MoveRight() { resp = "d"; };
+        void MoveUp() { resp = "w"; };
+        void MoveDown() { resp = "s"; }
+        void Interact() { resp = "e"; }
+        void InteractSpecial() { resp = "f"; }
 
-        void SetResponse(std::string _resp);
-        std::string GetResponse();
+        void SetResponse(string _resp) { resp = _resp; };
+        string GetResponse() { return resp; }
 
-        void SetPlayerPosition(std::pair<int, int> position);
-        std::pair<int, int> GetPlayerPosition();
+        int GetRound() const { return round; };
+        int GetTotalScore() const { return totalScore; };
+
+        pair<int, int> GetPlayerPosition() const { return playerPosition; };
+        vector<Items> GetPlayerHoldItems() { return playerHoldItems; };
+
+        pair<int, int> GetOrderDelivered() const { return orderDelivered; };
+        
+        Order GetNewOrder() const { return newOrder; };
+        vector<Order> GetOrderList() const { return orderList; };
+
+        int GetFryingTimer() const { return fryingTimer; };
+        FryingState GetFryingState() const { return fryingState; };
+
+        void PrintItems(vector<Items> items);
+        void PrintOrderInfo(Order order);
+        void PrintEvents();
+
+        void ReceiveEvents(const wfrest::Json &json);
 
     private:
-        // By chatGPT, I don't understand it, but it implements the singleton pattern
         GameController() {}
         GameController(std::string _resp) {
             resp = _resp;
@@ -44,24 +61,35 @@ namespace ctl {
         GameController(const GameController&) = delete;
         GameController& operator=(const GameController&) = delete;
 
-        static string resp;
+        string resp;
 
-        static int Round;
-        static int TotalScore;
-        static int TimeLeft; // Deprecated
+        int round;
+        int totalScore;
 
-        static pair<int, int> PlayerPosition;
-        static vector<enum Ingredient> PlayerHoldItems;
+        pair<int, int> playerPosition;
+        vector<Items> playerHoldItems;
 
-        static int RecipeTimeOut; // Deprecated
-        static pair<int, int> RecipeDelivered;
+        pair<int, int> orderDelivered;
 
-        static Recipe NewRecipe;
-        static vector<Recipe> RecipeList;
+        Order newOrder;
+        vector<Order> orderList;
 
-        static int FryingTimer;
-        static enum FryingState FryingState;
+        int fryingTimer;
+        FryingState fryingState;
 
+        void SetRound(int _round) { round = _round; };
+        void SetTotalScore(int _score) { totalScore = _score; };
+
+        void SetPlayerPosition(pair<int, int> _position) { playerPosition = _position; };
+        void SetPlayerHoldItems(vector<Items> _items) { playerHoldItems = _items; };
+
+        void SetOrderDelivered(pair<int, int> _data) { orderDelivered = _data; };
+
+        void SetNewOrder(Order _order) { newOrder = _order; };
+        void SetOrderList(vector<Order> _orderList) { orderList = _orderList; };
+
+        void SetFryingTimer(int _time) { fryingTimer = _time; };
+        void SetFryingState(enum FryingState _state) { fryingState = _state; };
     };
 }
 

@@ -6,54 +6,55 @@
 #include <unistd.h>
 #include "wfrest/HttpServer.h"
 #include "GameController.h"
-#include "user.h"
+#include "UserAction.h"
 
 using namespace wfrest;
 using namespace ctl;
 using namespace std;
 
+// -- DON'T MODIFY ANY CODE ABOVE THIS LINE -- //
+// -- YOU ARE ALLOW TO ADD HEADER FILES UNDER THIS LINE -- //
+
+
+// A template vector to store operations
+// Feel free to modify this vector (or not to use it at all)!
 vector<string> operations;
 
-void DefaultInitOperation();
+void DefaultInitialize();
 void DefaultSendOperation(GameController& controller);
 
-
-// Init the game
+// Init the game (DO NOT MODIFY THIS FUNCTION)
 void UserAction::InitGame(GameController& controller) {
-    /*
-        You can do some initialization here.
-    */
-    cout << "InitGame" << endl;
-    this->Initialize();
-
-
+    Initialize();
     // Set the response to "ok" when finished initialization
     controller.SetResponse("ok");
 }
 
-// Just a cute init function
+// Just a cute Initializing function
 void UserAction::Initialize() {
-    DefaultInitOperation();
+    // TODO: You can do some initialization in this function.
+    // Feel free to modify this function.
+    // DefaultInitialize() will make you a MEGA burger!
+    cout << "Initializing the game..." << endl;
+    DefaultInitialize();
 }
 
-// Gaming operations
+// Main Function of you game logic
 void UserAction::SendOperation(GameController& controller) {
+    // TODO: Implement your gaming logic here
+    // DefaultSendOperation() will make you a MEGA burger!
     DefaultSendOperation(controller);
 }
 
-// Deal with the events
-void UserAction::GetEvents(vector<string> events) {
-
+void TemplateMoveTo(Counter A, Counter B) {
+    // TODO: Implement your move logic here
 }
 
-// Maybe GetEvents is the same as ReceiveEvents, but nevermind, I'm tired - iceylemon
-void UserAction::ReceiveEvents(GameController& controller, vector<string> events) {
-    cout << "ReceiveEvents" << endl;
-    for (auto event : events) {
-        cout << event << endl;
-    }
-    controller.SetResponse("ok");
-}
+
+
+
+
+// -- Default Series Function Below -- //
 
 // SendOperation function template, free MEGA burger for you!
 void DefaultSendOperation(GameController& controller) {
@@ -71,10 +72,7 @@ void DefaultSendOperation(GameController& controller) {
     if (s == "f") controller.InteractSpecial();
 }
 
-void DefaultInitOperation() {
-    cout << "You should only call me once ..." << endl;
-
-    // map-based
+void DefaultInitialize() {
     operations = {
         "w", "w", "w", "w", "e", "d", "d", "d", "d", "w", "e", "f", "f", "f", // grab cheese and cut it
         "d", "d", "d", "d", "d", "d", "w", "e", "a", "w", "e", "s", "s", "d", "e", // fry meat and grab plate
@@ -103,8 +101,8 @@ void DefaultInitOperation() {
         "s", "s", "s", "s", "s", "s", "s", "s", // move down
         "e", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", // move to bottom left
         "w", "w", "w", "w", "w", "w", "w", "w", "w", "w", // move to bread counter
-        "d", "w", "e", "a", "w", "e", "d", "w", // grab bread
-        "e", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", 
+        "d", "w", "e", "a", "w", "e", "d", "w", "e", // grab bread
+        "e", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d",
         "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "e" // finish
     };
     reverse(operations.begin(), operations.end());

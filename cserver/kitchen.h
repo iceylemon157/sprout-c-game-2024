@@ -1,19 +1,22 @@
-enum Ingredient {
+#include <map>
+using namespace std;
+
+enum Items {
     // Non-edible
     Plate,
 
     // Raw Ingredients
     Cabbage,
-    Cheese,
-    MeatPatty,
+    CheeseBlock,
+    RawPatty,
     Tomato,
 
     // Processed Ingredients
     Bread,
-    SlicedCabage,
-    SlicedCheese,
-    SlicedTomato,
+    CabbageSlices,
+    CheeseSlices,
     CookedPatty,
+    TomatoSlices,
 
     // Overcooked Ingredients
     BurntPatty,
@@ -33,14 +36,9 @@ enum FryingState {
     Burnt,
 };
 
-enum DeliveryState {
-    // Is this necessary?
-    // Idle,
-    Delivered,
-    Failed,
-};
-
 enum Counter {
+    // This is probably not necessary now
+
     // Ingredient counters
     BreadCounter,
     CabbageCounter,
@@ -57,26 +55,54 @@ enum Counter {
     DeliveryCounter,
 };
 
-enum Event {
-    // Global events
-    Round,
-    TotalScore,
-    TimeLeft,
+struct Order {
+    // Properties
+    int orderID;
+    Recipe recipe;
+    int score;
+    int arrivalRound;
 
-    // Recipe events
-    NewRecipe,
-    RecipeList, // with score change and time left
+    // Constructors
+    Order() { orderID = -1; }
+    Order(int _orderID, Recipe _recipe, int _score, int _arrivalRound) {
+        orderID = _orderID,
+        recipe = _recipe,
+        score = _score,
+        arrivalRound = _arrivalRound;
+     }
+};
 
-    // Should the following two be replaced with DeliveryState?
-    RecipeDelivered,
-    RecipeTimeout,
-    
-    // Player events
-    PlayerPosition,
-    PlayerHoldItems,
+const map<Items, string> ItemsMap = {
+    { Plate, "Plate" },
+    { Cabbage, "Cabbage" },
+    { CheeseBlock, "CheeseBlock" },
+    { RawPatty, "RawPatty" },
+    { Tomato, "Tomato" },
+    { Bread, "Bread" },
+    { CabbageSlices, "CabbageSlices" },
+    { CheeseSlices, "CheeseSlices" },
+    { CookedPatty, "CookedPatty" },
+    { TomatoSlices, "TomatoSlices" },
+    { BurntPatty, "BurntPatty" },
+};
 
-    // Ingredient events
-    FryingTimer,
-    FryingState,
+const map<Recipe, string> RecipeMap = {
+    { Salad, "Salad" },
+    { Burger, "Burger" },
+    { CheeseBurger, "CheeseBurger" },
+    { MegaBurger, "MegaBurger" },
+};
 
+const map<FryingState, string> FryingStateMap = {
+    { Idle, "Idle" },
+    { Frying, "Frying" },
+    { Fried, "Fried" },
+    { Burnt, "Burnt" },
+};
+
+const map<Recipe, vector<Items>> RecipeIngredients = {
+    { Salad, { CabbageSlices, TomatoSlices } },
+    { Burger, { Bread, CookedPatty } },
+    { CheeseBurger, { Bread, CheeseSlices, CookedPatty } },
+    { MegaBurger, { Bread, CabbageSlices, CheeseSlices, CookedPatty, TomatoSlices } },
 };
