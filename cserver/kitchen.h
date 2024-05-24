@@ -43,7 +43,7 @@ enum Counter {
     BreadCounter,
     CabbageCounter,
     CheeseCounter,
-    MeatPattyCounter,
+    RawPattyCounter,
     TomatoCounter,
 
     // Tool counters

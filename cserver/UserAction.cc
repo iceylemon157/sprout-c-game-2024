@@ -1,10 +1,7 @@
-#include "workflow/WFFacilities.h"
-#include <csignal>
-#include <random>
-#include <vector>
 #include <iostream>
-#include <unistd.h>
-#include "wfrest/HttpServer.h"
+#include <vector>
+#include <algorithm>
+#include <string>
 #include "GameController.h"
 #include "UserAction.h"
 
@@ -12,19 +9,46 @@ using namespace wfrest;
 using namespace ctl;
 using namespace std;
 
+GameController& controller = GameController::getInstance("default");
+
 // -- DON'T MODIFY ANY CODE ABOVE THIS LINE -- //
 // -- YOU ARE ALLOW TO ADD HEADER FILES UNDER THIS LINE -- //
 
+// TODO: Choose your recipe mode
+// TODO: Maybe will be replaced by separating files
+const string RecipeMode = "salad";
+// const string RecipeMode = "salad_cheeseburger";
+// const string RecipeMode = "all";
 
-// A template vector to store operations
-// Feel free to modify this vector (or not to use it at all)!
-vector<string> operations;
+// A template GLOBAL VARIABLE vector to store operations
+// Feel free to modify this data structure! (or create your own to use)
+vector<string> templateOperations;
+
+// A template map to store the position of each counter
+// Question: How do you extend this map to store more than one position for a counter?
+// Question2: cutting / normal counter have more than one position, how will you handle it?
+const map<Counter, pair<int, int>> counterPosition = {
+    { BreadCounter, {0, 1} },
+    { CabbageCounter, {8, 3} },
+    { CheeseCounter, {0, 9} },
+    { TomatoCounter, {0, 5} },
+    { RawPattyCounter, {0, 20} },
+    { StoveCounter, {4, 1} },
+    { PlatesCounter, {3, 20} },
+    { TrashCounter, {6, 20} },
+    { DeliveryCounter, {1, 20} },
+
+    // There are 2 cutting counters, this is only one of it
+    { CuttingCounter, {8, 15} },
+    // There are so many normal counters, this is only one of it
+    { NormalCounter, {8, 20} }
+};
 
 void DefaultInitialize();
-void DefaultSendOperation(GameController& controller);
+void DefaultSendOperation();
 
 // Init the game (DO NOT MODIFY THIS FUNCTION)
-void UserAction::InitGame(GameController& controller) {
+void UserAction::InitGame() {
     Initialize();
     // Set the response to "ok" when finished initialization
     controller.SetResponse("ok");
@@ -34,34 +58,141 @@ void UserAction::InitGame(GameController& controller) {
 void UserAction::Initialize() {
     // TODO: You can do some initialization in this function.
     // Feel free to modify this function.
-    // DefaultInitialize() will make you a MEGA burger!
+    // DefaultInitialize() will make you a MEGABurger!
     cout << "Initializing the game..." << endl;
     DefaultInitialize();
 }
 
 // Main Function of you game logic
-void UserAction::SendOperation(GameController& controller) {
+void UserAction::SendOperation() {
     // TODO: Implement your gaming logic here
-    // DefaultSendOperation() will make you a MEGA burger!
-    DefaultSendOperation(controller);
-}
-
-void TemplateMoveTo(Counter A, Counter B) {
-    // TODO: Implement your move logic here
+    // DefaultSendOperation() will make you a MEGABurger!
+    DefaultSendOperation();
 }
 
 
 
+// -- Moving series functions Below -- //
 
+void MovePointToPoint(pair<int, int> from, pair<int, int> to, GameController& controller) {
+    // TODO: Move from one point to another point
+}
+
+void MovePointToCounter(pair<int, int> fromPoint, Counter toCounter, GameController& controller) {
+    // TODO: Move from one point to a counter
+    pair<int, int> targetPosition = counterPosition.at(toCounter);
+
+}
+
+void MoveCounterToCounter(Counter from, Counter to, GameController& controller) {
+    // TODO: Move from one counter to another counter
+}
+
+// -- Moving series functions Above -- //
+
+// -- Strategy for different Recipe Mode Below -- //
+
+Recipe SaladModeStrategy() {
+    // Only salad will be in order in Salad Mode
+    return Salad;
+}
+
+Recipe SaladCheeseburgerModeStrategy() {
+    // TODO: Implement your salad cheeseburger mode strategy here
+    // Below is a simple example, feel free to change it
+
+    vector<Order> orderList = controller.GetOrderList();
+    if (orderList.empty()) {
+        return Salad;
+    }
+    return orderList[0].recipe;
+}
+
+Recipe AllRecipeModeStrategy() {
+    // TODO: Implement your all recipe mode strategy here
+    // Below is a simple example, feel free to change it
+
+    return MegaBurger;
+}
+
+Recipe GetNextOrder() {
+    // Return the next order based on the Recipe Mode
+    if (RecipeMode == "salad") {
+        return SaladModeStrategy();
+    } else if (RecipeMode == "salad_cheeseburger") {
+        return SaladCheeseburgerModeStrategy();
+    } else {
+        return AllRecipeModeStrategy();
+    }
+}
+
+// -- Strategy for different Recipe Mode Above -- //
+
+// -- Miscallaneous functions Below -- //
+
+void CutIngredient(int times, GameController& controller) {
+    // TODO: Cut the Ingredient for times
+}
+
+// -- Miscallaneous functions Above -- //
+
+// -- Pipeline Funtions Below -- //
+
+// You are welcome to change the function prototype
+// Like changing the return type or adding more parameters
+void MakeSalad(GameController& controller) {
+    // TODO: Salad Making Pipeline
+    // Move To Cabbage Counter
+    // Grab Cabbage
+    // Move To Cutting Counter
+    // Cut Cabbage
+    // Grab Cabbage Slices
+    // Move To A Normal Counter
+    // Put Down Cabbage Slices
+    // Move To Tomato Counter
+    // Grab Tomato
+    // Move To A Cutting Counter
+    // Cut Tomato
+    // Move To Plate Counter
+    // Grab Plate
+    // Move To A Cutting Counter
+    // Grab Tomato Slices
+    // Move To A Normal Counter
+    // Grab Cabbage Slices
+    // Move To Delivery Counter
+    // Send Order!
+}
+
+void SimpleExample() {
+    // The beginning steps of making a salad
+
+    templateOperations.clear();
+    // Move to Cabbage Counter
+    pair<int, int> playerPosition = controller.GetPlayerPosition();
+    MovePointToCounter(playerPosition, CabbageCounter, controller);
+    // Grab Cabbage
+    templateOperations.push_back("e");
+    // Move to Cutting Counter
+    MoveCounterToCounter(CabbageCounter, CuttingCounter, controller);
+    // Cut Cabbage
+    templateOperations.push_back("e");
+    // ... Do The Rest By Yourself !
+}
+
+void MakeBurger(GameController& controller) {}
+void MakeCheeseBurger(GameController& controller) {}
+void MakeMegaBurger(GameController& controller) {}
+
+// -- Pipeline Funtions Below -- //
 
 // -- Default Series Function Below -- //
 
-// SendOperation function template, free MEGA burger for you!
-void DefaultSendOperation(GameController& controller) {
+// SendOperation function template, free MEGABurger for you!
+void DefaultSendOperation() {
     string s = "";
-    if (!operations.empty()) {
-        s = operations.back();
-        operations.pop_back();
+    if (!templateOperations.empty()) {
+        s = templateOperations.back();
+        templateOperations.pop_back();
         cout << "Operation: " << s << endl;
     }
     if (s == "w") controller.MoveUp();
@@ -73,7 +204,7 @@ void DefaultSendOperation(GameController& controller) {
 }
 
 void DefaultInitialize() {
-    operations = {
+    templateOperations = {
         "w", "w", "w", "w", "e", "d", "d", "d", "d", "w", "e", "f", "f", "f", // grab cheese and cut it
         "d", "d", "d", "d", "d", "d", "w", "e", "a", "w", "e", "s", "s", "d", "e", // fry meat and grab plate
         "a", "a", "a", "a", "w", "w", "e", "d", "w", "e", // grab cheese slices and cooked meat
@@ -105,5 +236,5 @@ void DefaultInitialize() {
         "e", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d",
         "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "e" // finish
     };
-    reverse(operations.begin(), operations.end());
+    reverse(templateOperations.begin(), templateOperations.end());
 }

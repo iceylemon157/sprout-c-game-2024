@@ -33,7 +33,7 @@ int main() {
 
     // init game
     svr.GET("/api/init", [&](const HttpReq *req, HttpResp *resp) {
-        action.InitGame(controller);
+        action.InitGame();
 
         resp->String(controller.GetResponse());
         // CORS
@@ -43,7 +43,7 @@ int main() {
     // gaming operations (move right, move left, move up, move down, interact, interact special)
     svr.GET("/api/operation", [&](const HttpReq *req, HttpResp *resp) {
         cout << "Round: " << req->query("round") << endl;
-        action.SendOperation(controller);
+        action.SendOperation();
 
         resp->String(controller.GetResponse());
         // CORS
