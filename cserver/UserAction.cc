@@ -15,25 +15,27 @@ GameController& controller = GameController::getInstance("default");
 // -- YOU ARE ALLOW TO ADD HEADER FILES UNDER THIS LINE -- //
 
 // TODO: Choose your recipe mode
-// TODO: Maybe will be replaced by separating files
+// you may want to have different strategy for different recipe mode
+
 const string RecipeMode = "salad";
 // const string RecipeMode = "salad_cheeseburger";
 // const string RecipeMode = "all";
 
+
 // A template GLOBAL VARIABLE vector to store operations
 // Feel free to modify this data structure! (or create your own to use)
-vector<string> templateOperations;
+vector<string> operations;
 
 // A template map to store the position of each counter
 // Question: How do you extend this map to store more than one position for a counter?
 // Question2: cutting / normal counter have more than one position, how will you handle it?
 const map<Counter, pair<int, int>> counterPosition = {
     { BreadCounter, {0, 1} },
-    { CabbageCounter, {8, 3} },
-    { CheeseCounter, {0, 9} },
-    { TomatoCounter, {0, 5} },
+    { CabbageCounter, {8, 2} },
+    { CheeseBlockCounter, {0, 9} },
+    { TomatoCounter, {8, 5} },
     { RawPattyCounter, {0, 20} },
-    { StoveCounter, {4, 1} },
+    { StoveCounter, {0, 19} },
     { PlatesCounter, {3, 20} },
     { TrashCounter, {6, 20} },
     { DeliveryCounter, {1, 20} },
@@ -42,6 +44,23 @@ const map<Counter, pair<int, int>> counterPosition = {
     { CuttingCounter, {8, 15} },
     // There are so many normal counters, this is only one of it
     { NormalCounter, {8, 20} }
+};
+
+const map<Counter, string> counterDirection = {
+    { BreadCounter, "w" },
+    { CabbageCounter, "s" },
+    { CheeseBlockCounter, "w" },
+    { TomatoCounter, "s" },
+    { RawPattyCounter, "w" },
+    { StoveCounter, "w" },
+    { PlatesCounter, "d" },
+    { TrashCounter, "d" },
+    { DeliveryCounter, "d" },
+
+    // There are 2 cutting counters, this is only one of it
+    { CuttingCounter, "s" },
+    // There are so many normal counters, this is only one of it
+    { NormalCounter, "d" }
 };
 
 void DefaultInitialize();
@@ -69,7 +88,6 @@ void UserAction::SendOperation() {
     // DefaultSendOperation() will make you a MEGABurger!
     DefaultSendOperation();
 }
-
 
 
 // -- Moving series functions Below -- //
@@ -166,16 +184,16 @@ void MakeSalad(GameController& controller) {
 void SimpleExample() {
     // The beginning steps of making a salad
 
-    templateOperations.clear();
+    operations.clear();
     // Move to Cabbage Counter
     pair<int, int> playerPosition = controller.GetPlayerPosition();
     MovePointToCounter(playerPosition, CabbageCounter, controller);
     // Grab Cabbage
-    templateOperations.push_back("e");
+    operations.push_back("e");
     // Move to Cutting Counter
     MoveCounterToCounter(CabbageCounter, CuttingCounter, controller);
     // Cut Cabbage
-    templateOperations.push_back("e");
+    operations.push_back("e");
     // ... Do The Rest By Yourself !
 }
 
@@ -190,9 +208,9 @@ void MakeMegaBurger(GameController& controller) {}
 // SendOperation function template, free MEGABurger for you!
 void DefaultSendOperation() {
     string s = "";
-    if (!templateOperations.empty()) {
-        s = templateOperations.back();
-        templateOperations.pop_back();
+    if (!operations.empty()) {
+        s = operations.back();
+        operations.pop_back();
         cout << "Operation: " << s << endl;
     }
     if (s == "w") controller.MoveUp();
@@ -204,7 +222,7 @@ void DefaultSendOperation() {
 }
 
 void DefaultInitialize() {
-    templateOperations = {
+    operations = {
         "w", "w", "w", "w", "e", "d", "d", "d", "d", "w", "e", "f", "f", "f", // grab cheese and cut it
         "d", "d", "d", "d", "d", "d", "w", "e", "a", "w", "e", "s", "s", "d", "e", // fry meat and grab plate
         "a", "a", "a", "a", "w", "w", "e", "d", "w", "e", // grab cheese slices and cooked meat
@@ -236,5 +254,5 @@ void DefaultInitialize() {
         "e", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d",
         "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "d", "e" // finish
     };
-    reverse(templateOperations.begin(), templateOperations.end());
+    reverse(operations.begin(), operations.end());
 }
