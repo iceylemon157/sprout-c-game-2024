@@ -7,7 +7,7 @@ services:
     ports:
       - "12345:12345"  # Adjust port if needed
     volumes:
-      - ./UnityClient-Beta:/app  # Mount the folder with wasm files
+      - ./UnityClient:/app  # Mount the folder with wasm files
     networks:
       - app_net
 
