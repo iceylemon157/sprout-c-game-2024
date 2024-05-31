@@ -37,12 +37,10 @@ enum FryingState {
 };
 
 enum Counter {
-    // This is probably not necessary now
-
     // Ingredient counters
     BreadCounter,
     CabbageCounter,
-    CheeseCounter,
+    CheeseBlockCounter,
     RawPattyCounter,
     TomatoCounter,
 

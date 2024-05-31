@@ -12,7 +12,6 @@ void GameController::ReceiveEvents(const wfrest::Json &json) {
 
     GameController::SetPlayerPosition(pair<int, int>(int(json["PlayerPosition"]["x"]), int(json["PlayerPosition"]["y"])));
 
-    // TODO: Should playerHoldItems be sorted?
     vector<Items> playerHoldItems;
     for (auto item : json["PlayerHoldItems"]) {
         Items itemEnum = (Items)int(item);
@@ -20,7 +19,6 @@ void GameController::ReceiveEvents(const wfrest::Json &json) {
     }
     GameController::SetPlayerHoldItems(playerHoldItems);
 
-    // TODO: RecipeDelivered not considered yet
     pair<int, int> orderDelivered = pair<int, int>(
         int(json["OrderDelivered"][0]), int(json["OrderDelivered"][1])
     );

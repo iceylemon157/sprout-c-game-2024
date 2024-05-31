@@ -2,24 +2,8 @@
 
 class UserAction {
 public:
-    // DO NOT MODIFY THESE TWO FUNCTIONS //
     void SendOperation();
     void InitGame();
-    // DO NOT MODIFY THESE TWO FUNCTIONS //
-
-    // -- YOU CAN ADD YOUR OWN FUNCTIONS/VARIABLES BELOW THIS LINE -- //
-
-
-
-    // -- YOU CAN ADD YOUR OWN FUNCTIONS/VARIABLES ABOVE THIS LINE -- //
 private:
-    // DO NOT MODIFY THIS FUNCTION //
     void Initialize();
-    // DO NOT MODIFY THIS FUNCTION //
-
-    // -- YOU CAN ADD YOUR OWN FUNCTIONS/VARIABLES BELOW THIS LINE -- //
-
-
-
-    // -- YOU CAN ADD YOUR OWN FUNCTIONS/VARIABLES ABOVE THIS LINE -- //
 };
