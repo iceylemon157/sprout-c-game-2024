@@ -42,7 +42,7 @@ int main() {
 
     // gaming operations (move right, move left, move up, move down, interact, interact special)
     svr.GET("/api/operation", [&](const HttpReq *req, HttpResp *resp) {
-        cout << "Round: " << req->query("round") << endl;
+        // cout << "Round: " << req->query("round") << endl;
         action.SendOperation();
 
         resp->String(controller.GetResponse());
@@ -66,7 +66,7 @@ int main() {
     }, {"OPTIONS"});
 
     svr.POST("/api/events", [&](const HttpReq *req, HttpResp *resp) {
-        cout << "Received events: " << req->json() << endl;
+        // cout << "Received events: " << req->json() << endl;
 
         controller.ReceiveEvents(req->json());
 
