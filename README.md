@@ -27,3 +27,6 @@ docker compose exec cpp_server /bin/bash
 (在 docker 裡面) make && ./server
 ```
 
+## Reference
+
+Game Assets are mostly from the tutorial of [Code Monkey](https://www.youtube.com/watch?v=AmGSEH7QcDg). Also, many of the C# code follows the tutorial (for the WebGL build), while the code has been modified by me to be able to connect to C++ Server.
