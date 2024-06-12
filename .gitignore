@@ -1,0 +1,6 @@
+.vscode/
+
+# evil files
+cserver/answers
+cserver/build.cmake
+cserver/server
