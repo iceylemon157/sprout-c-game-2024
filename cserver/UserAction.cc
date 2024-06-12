@@ -92,17 +92,17 @@ void UserAction::SendOperation() {
 
 // -- Moving series functions Below -- //
 
-void MovePointToPoint(pair<int, int> from, pair<int, int> to, GameController& controller) {
+void MovePointToPoint(pair<int, int> from, pair<int, int> to) {
     // TODO: Move from one point to another point
 }
 
-void MovePointToCounter(pair<int, int> fromPoint, Counter toCounter, GameController& controller) {
+void MovePointToCounter(pair<int, int> fromPoint, Counter toCounter) {
     // TODO: Move from one point to a counter
     pair<int, int> targetPosition = counterPosition.at(toCounter);
 
 }
 
-void MoveCounterToCounter(Counter from, Counter to, GameController& controller) {
+void MoveCounterToCounter(Counter from, Counter to) {
     // TODO: Move from one counter to another counter
 }
 
@@ -148,7 +148,7 @@ Recipe GetNextOrder() {
 
 // -- Miscallaneous functions Below -- //
 
-void CutIngredient(int times, GameController& controller) {
+void CutIngredient(int times) {
     // TODO: Cut the Ingredient for times
 }
 
@@ -158,7 +158,7 @@ void CutIngredient(int times, GameController& controller) {
 
 // You are welcome to change the function prototype
 // Like changing the return type or adding more parameters
-void MakeSalad(GameController& controller) {
+void MakeSalad() {
     // TODO: Salad Making Pipeline
     // Move To Cabbage Counter
     // Grab Cabbage
@@ -187,19 +187,19 @@ void SimpleExample() {
     operations.clear();
     // Move to Cabbage Counter
     pair<int, int> playerPosition = controller.GetPlayerPosition();
-    MovePointToCounter(playerPosition, CabbageCounter, controller);
+    MovePointToCounter(playerPosition, CabbageCounter);
     // Grab Cabbage
     operations.push_back("e");
     // Move to Cutting Counter
-    MoveCounterToCounter(CabbageCounter, CuttingCounter, controller);
+    MoveCounterToCounter(CabbageCounter, CuttingCounter);
     // Cut Cabbage
     operations.push_back("e");
     // ... Do The Rest By Yourself !
 }
 
-void MakeBurger(GameController& controller) {}
-void MakeCheeseBurger(GameController& controller) {}
-void MakeMegaBurger(GameController& controller) {}
+void MakeBurger() {}
+void MakeCheeseBurger() {}
+void MakeMegaBurger() {}
 
 // -- Pipeline Funtions Below -- //
 
