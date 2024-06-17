@@ -30,6 +30,7 @@ namespace ctl {
         void SetResponse(string _resp) { resp = _resp; };
         string GetResponse() { return resp; }
 
+        string GetRecipeMode() const { return recipeMode; }
         int GetRound() const { return round; };
         int GetTotalScore() const { return totalScore; };
 
@@ -63,6 +64,7 @@ namespace ctl {
 
         string resp;
 
+        string recipeMode;
         int round;
         int totalScore;
 
@@ -77,6 +79,7 @@ namespace ctl {
         int fryingTimer;
         FryingState fryingState;
 
+        void SetRecipeMode(string _mode) { recipeMode = _mode; };
         void SetRound(int _round) { round = _round; };
         void SetTotalScore(int _score) { totalScore = _score; };
 

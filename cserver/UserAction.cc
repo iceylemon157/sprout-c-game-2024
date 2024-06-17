@@ -17,9 +17,9 @@ GameController& controller = GameController::getInstance("default");
 // TODO: Choose your recipe mode
 // you may want to have different strategy for different recipe mode
 
-const string RecipeMode = "salad";
-// const string RecipeMode = "salad_cheeseburger";
-// const string RecipeMode = "all";
+const string RecipeMode = "Salad";
+// const string RecipeMode = "SaladAndCheeseBurger";
+// const string RecipeMode = "AllRecipe";
 
 
 // A template GLOBAL VARIABLE vector to store operations
@@ -135,9 +135,9 @@ Recipe AllRecipeModeStrategy() {
 
 Recipe GetNextOrder() {
     // Return the next order based on the Recipe Mode
-    if (RecipeMode == "salad") {
+    if (RecipeMode == "Salad") {
         return SaladModeStrategy();
-    } else if (RecipeMode == "salad_cheeseburger") {
+    } else if (RecipeMode == "SaladAndCheeseBurger") {
         return SaladCheeseburgerModeStrategy();
     } else {
         return AllRecipeModeStrategy();

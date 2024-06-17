@@ -7,6 +7,7 @@ void GameController::ReceiveEvents(const wfrest::Json &json) {
     // DO NOT MODIFY THIS FUNCTION
     // Parse the JSON and update the game state
 
+    GameController::SetRecipeMode(json["RecipeMode"]);
     GameController::SetRound(int(json["Round"]));
     GameController::SetTotalScore(int(json["TotalScore"]));
 
