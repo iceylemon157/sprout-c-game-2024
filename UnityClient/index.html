@@ -7,7 +7,7 @@
   </head>
   <body style="text-align: center; padding: 0; border: 0; margin: 0;">
     <canvas id="unity-canvas" width=1280 height=720 tabindex="-1" style="width: 1280px; height: 720px; background: #231F20"></canvas>
-    <script src="Build/WebGLBuild-Final2.loader.js"></script>
+    <script src="Build/WebGLBuild-Release-v2.loader.js"></script>
     <script>
       if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
         // Mobile device style: fill the whole browser client area with the game canvas:
@@ -25,10 +25,10 @@
       }
 
       createUnityInstance(document.querySelector("#unity-canvas"), {
-        dataUrl: "Build/WebGLBuild-Final2.data",
-        frameworkUrl: "Build/WebGLBuild-Final2.framework.js",
-        codeUrl: "Build/WebGLBuild-Final2.wasm",
-        symbolsUrl: "Build/WebGLBuild-Final2.symbols.json",
+        dataUrl: "Build/WebGLBuild-Release-v2.data",
+        frameworkUrl: "Build/WebGLBuild-Release-v2.framework.js",
+        codeUrl: "Build/WebGLBuild-Release-v2.wasm",
+        symbolsUrl: "Build/WebGLBuild-Release-v2.symbols.json",
         streamingAssetsUrl: "StreamingAssets",
         companyName: "DefaultCompany",
         productName: "KitchenChaos",
