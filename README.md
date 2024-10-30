@@ -2,8 +2,8 @@
 
 ## Source Code
 
-[Unity Game Client Source Code Repo](https://github.com/iceylemon157/sprout-c-game-2024-unity-client)
-[C++ Server Template and Sample Solutions](https://github.com/iceylemon157/sprout-c-game-2024-cpp-server)
+- [Unity Game Client Source Code Repo](https://github.com/iceylemon157/sprout-c-game-2024-unity-client)
+- [C++ Server Template and Sample Solutions](https://github.com/iceylemon157/sprout-c-game-2024-cpp-server)
 
 ## How to Start
 
