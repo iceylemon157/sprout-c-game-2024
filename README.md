@@ -1,6 +1,13 @@
 # 資訊之芽 2024 大作業二
 
+## Source Code
+
+[Unity Game Client Source Code Repo](https://github.com/iceylemon157/sprout-c-game-2024-unity-client)
+[C++ Server Template and Sample Solutions](https://github.com/iceylemon157/sprout-c-game-2024-cpp-server)
+
 ## How to Start
+
+The following is the installation of the WebGL game client and the C++ server.
 
 ### WebGL 遊戲安裝
 
@@ -33,4 +40,4 @@ docker compose exec cpp_server /bin/bash
 
 ## Reference
 
-Game Assets are mostly from the tutorial of [Code Monkey](https://www.youtube.com/watch?v=AmGSEH7QcDg). Also, many of the C# code follows the tutorial (for the WebGL build), while the code has been modified by me to be able to connect to C++ Server.
+Game Assets are mostly from the tutorial of [Code Monkey](https://www.youtube.com/watch?v=AmGSEH7QcDg). Also, many of the C# code follows the tutorial (for the WebGL build), while the code has been modified by me to enable the gameplay with stateful C++ server.
